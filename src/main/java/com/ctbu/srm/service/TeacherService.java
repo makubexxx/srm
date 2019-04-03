@@ -1,11 +1,14 @@
 package com.ctbu.srm.service;
 
 import com.ctbu.srm.base.BaseService;
+import com.ctbu.srm.entity.Teacher;
 import com.ctbu.srm.entity.dto.TeacherLoginDTO;
 import com.ctbu.srm.exception.SrmException;
+import com.ctbu.srm.repository.TeacherRepository;
 import com.ctbu.srm.validator.ValidationResult;
 import com.ctbu.srm.validator.ValidatorImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,7 +20,10 @@ import org.springframework.stereotype.Service;
 public class TeacherService extends BaseService {
     @Autowired
     ValidatorImpl validator;
+    @Autowired
+    TeacherRepository teacherRepository;
 
+    @Cacheable(value="user-key")
     public   void login(TeacherLoginDTO teacherLoginDTO) throws Exception
     {
         //验证参数完整性
@@ -26,6 +32,9 @@ public class TeacherService extends BaseService {
         {
             throw new SrmException(validationResult.getErrMsg());
         }
+        Teacher teacher =teacherRepository.findByUserName(teacherLoginDTO.getAccount());
+
+
 
     }
 }
