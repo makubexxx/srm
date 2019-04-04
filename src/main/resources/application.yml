@@ -14,6 +14,16 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  mail:
+    host: smtp.qiye.163.com //邮箱服务器地址
+    username: 123456
+    password: 123456
+    default-encoding: UTF-8
 
 
 
