@@ -1,4 +1,4 @@
-package com.ctbu.srm.modules.websocket;
+package com.ctbu.srm.modules.websocket.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

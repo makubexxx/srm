@@ -1,4 +1,4 @@
-package com.ctbu.srm.service;
+package com.ctbu.srm.modules.admin.mapper.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

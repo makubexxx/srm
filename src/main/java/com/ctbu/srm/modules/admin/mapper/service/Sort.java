@@ -1,4 +1,4 @@
-package com.ctbu.srm.service;
+package com.ctbu.srm.modules.admin.mapper.service;
 
 /**
  * @Author: Meiziyu
