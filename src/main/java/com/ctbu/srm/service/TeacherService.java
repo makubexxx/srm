@@ -1,7 +1,7 @@
 package com.ctbu.srm.service;
 
 import com.ctbu.srm.base.BaseService;
-import com.ctbu.srm.entity.Teacher;
+import com.ctbu.srm.entity.domian.Teacher;
 import com.ctbu.srm.entity.dto.TeacherLoginDTO;
 import com.ctbu.srm.exception.SrmException;
 import com.ctbu.srm.mq.AuditingSender;

@@ -1,4 +1,4 @@
-package com.ctbu.srm.entity;
+package com.ctbu.srm.entity.domian;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

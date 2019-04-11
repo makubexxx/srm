@@ -5,8 +5,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.*;
+import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -22,16 +26,15 @@ public class WebSocketServer {
 
     private static Logger log = LoggerFactory.getLogger(WebSocketServer.class);
     private static final AtomicInteger OnlineCount = new AtomicInteger(0);
-    // concurrent包的线程安全Set，用来存放每个客户端对应的Session对象。
-    private static CopyOnWriteArraySet<Session> SessionSet = new CopyOnWriteArraySet<Session>();
-
+    // concurrent包的线程安全HashMap，用来存放每个客户端对应的Session对象 将UserId和WebsocketSession进行绑定。
+    private static ConcurrentHashMap<String,Session> webSocketMap = new ConcurrentHashMap<String,Session>();
 
     /**
      * 连接建立成功调用的方法
      */
     @OnOpen
-    public void onOpen(Session session) {
-        SessionSet.add(session);
+    public void onOpen(Session session,@PathParam("userId")String  userId) {
+        webSocketMap.put(userId, session);
         int cnt = OnlineCount.incrementAndGet(); // 在线数加1
         log.info("有连接加入，当前连接数为：{}", cnt);
         SendMessage(session, "连接成功");
@@ -42,7 +45,8 @@ public class WebSocketServer {
      */
     @OnClose
     public void onClose(Session session) {
-        SessionSet.remove(session);
+        Map<String, String> map = session.getPathParameters();
+        webSocketMap.remove(map.get("userId")); //从Map中删除
         int cnt = OnlineCount.decrementAndGet();
         log.info("有连接关闭，当前连接数为：{}", cnt);
     }
@@ -91,32 +95,33 @@ public class WebSocketServer {
      * @throws IOException
      */
     public static void BroadCastInfo(String message) throws IOException {
-        for (Session session : SessionSet) {
+
+        //改为entryset遍历Map
+        Iterator iter = webSocketMap.entrySet().iterator();
+        while (iter.hasNext()) {
+            Map.Entry entry = (Map.Entry) iter.next();
+            String  UserId =  (String)  entry.getKey();
+            Session session = (Session) entry.getValue();
             if(session.isOpen()){
                 SendMessage(session, message);
             }
+
         }
     }
 
     /**
      * 指定Session发送消息
-     * @param sessionId
+     * @param userId
      * @param message
      * @throws IOException
      */
-    public static void SendMessage(String sessionId,String message) throws IOException {
-        Session session = null;
-        for (Session s : SessionSet) {
-            if(s.getId().equals(sessionId)){
-                session = s;
-                break;
-            }
-        }
+    public static void SendMessage(String userId,String message) throws IOException {
+        Session  session =webSocketMap.get(userId);
         if(session!=null){
             SendMessage(session, message);
         }
         else{
-            log.warn("没有找到你指定ID的会话：{}",sessionId);
+            log.warn("没有找到你指定ID的会话：{}",userId);
         }
     }
 }

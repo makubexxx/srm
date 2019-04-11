@@ -2,7 +2,7 @@ package com.ctbu.srm;
 
 
 
-import com.ctbu.srm.entity.Teacher;
+import com.ctbu.srm.entity.domian.Teacher;
 import com.ctbu.srm.repository.TeacherRepository;
 import org.junit.Assert;
 import org.junit.Test;

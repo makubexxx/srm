@@ -1,6 +1,6 @@
 package com.ctbu.srm.repository;
 
-import com.ctbu.srm.entity.Teacher;
+import com.ctbu.srm.entity.domian.Teacher;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 /**
