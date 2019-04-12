@@ -5,23 +5,22 @@ server:
   tomcat.uri-encoding: UTF-8
 spring:
   datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://localhost:3306/test1?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&useSSL=true
     username: root
     password: 123456
-    driver-class-name: com.mysql.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    dbcp2:
+      max-idle: 5
+      min-idle: 3
+      initial-size: 3
+
 mybatis-plus:
-  mapper-locations:
-  type-aliases-package: classpath:com/ctbu/srm/mapper/*.xml
-  rabbitmq:
-    host: localhost
-    port: 5672
-    username: guest
-    password: guest
-  mail:
-    host: smtp.qiye.163.com //邮箱服务器地址
-    username: 123456
-    password: 123456
-    default-encoding: UTF-8
+  type-aliases-package: com.ctbu.srm.entity.domain
+#  mapper-locations: classpath:/mapper/*Mapper.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
 
 
 

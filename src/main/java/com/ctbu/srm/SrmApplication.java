@@ -1,11 +1,12 @@
 package com.ctbu.srm;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ComponentScan;
+
 
 @SpringBootApplication
+@MapperScan("com.ctbu.srm.modules.user.mapper")  //配置mapper扫描
 public class SrmApplication {
 
 	public static void main(String[] args) {
