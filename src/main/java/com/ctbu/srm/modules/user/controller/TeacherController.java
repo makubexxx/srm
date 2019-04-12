@@ -3,6 +3,7 @@ package com.ctbu.srm.modules.user.controller;
 import com.ctbu.srm.base.BaseController;
 import com.ctbu.srm.entity.domain.Teacher;
 import com.ctbu.srm.modules.user.service.ITeacherService;
+import com.ctbu.srm.modules.user.service.impl.TeacherServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,12 +24,12 @@ import java.util.List;
 public class TeacherController extends BaseController {
 
     @Autowired
-    ITeacherService iteacherService;
+    TeacherServiceImpl teacherService;
 
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public @ResponseBody
     String teacherInfo(HttpServletRequest request, HttpServletResponse response) throws Exception {
-        List<Teacher> teachers= iteacherService.saveTeacher();
+        List<Teacher> teachers= teacherService.saveTeacher();
         return toJson(teachers, request, response);
     }
 

@@ -2,10 +2,12 @@ package com.ctbu.srm.modules.user.service.impl;
 
 
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.ctbu.srm.entity.AccountExtCreatedEvent;
 import com.ctbu.srm.entity.domain.Teacher;
 import com.ctbu.srm.modules.user.mapper.TeacherMapper;
 import com.ctbu.srm.modules.user.service.ITeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,6 +26,10 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
     @Autowired
     TeacherMapper teacherMapper;
 
+    @Autowired
+    private ApplicationEventPublisher publisher;
+
+
     public List<Teacher> saveTeacher()
     {
         Teacher teacher = new Teacher();
@@ -33,6 +39,10 @@ public class TeacherServiceImpl extends ServiceImpl<TeacherMapper, Teacher> impl
         teacher.setEmail("meiziyu@qq.com");
         teacher.setRegTime("2019/4/12");
         Integer result= teacherMapper.insert(teacher);
+        if (result>0)
+        {
+            publisher.publishEvent(new AccountExtCreatedEvent(teacher.getId().toString()));
+        }
         return  teacherMapper.selectByName("meiziyu");
     }
 }
