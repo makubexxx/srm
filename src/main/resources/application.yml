@@ -21,6 +21,11 @@ mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-
+jwt:
+  tokenHeader: Authorization
+  tokenPrefix: Bearer
+  secret: srm@meiziyu
+  expiration: 3600
+  rememberExpiration: 604800
 
 

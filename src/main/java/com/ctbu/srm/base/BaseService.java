@@ -1,7 +1,6 @@
 package com.ctbu.srm.base;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
 import org.springframework.stereotype.Service;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -46,5 +45,4 @@ public class BaseService {
         parallelLockMap.remove(key);
     }
 
-    public Gson gsonBuilder = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").disableHtmlEscaping().create();
 }

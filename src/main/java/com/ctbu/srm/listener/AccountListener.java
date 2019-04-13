@@ -1,8 +1,6 @@
 package com.ctbu.srm.listener;
 
 import com.ctbu.srm.entity.AccountExtCreatedEvent;
-import com.ctbu.srm.entity.domain.UserExtend;
-import com.ctbu.srm.modules.user.service.impl.UserExtendServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;

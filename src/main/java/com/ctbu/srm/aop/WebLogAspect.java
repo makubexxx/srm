@@ -27,7 +27,7 @@ public class WebLogAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(WebLogAspect.class);
 
-    @Pointcut("execution( * com.ctbu.srm.controller.*.*(..))")//两个..代表所有子目录，最后括号里的两个..代表所有参数
+    @Pointcut("execution( * com.ctbu.srm.modules.*.controller.*.*(..))")//两个..代表所有子目录，最后括号里的两个..代表所有参数
     public void logPointCut() {
     }
 
@@ -50,7 +50,6 @@ public class WebLogAspect {
         //logger.info("IP : " + IPAddressUtil.getClientIpAddress(request));
         logger.info("CLASS_METHOD : " + joinPoint.getSignature().getDeclaringTypeName() + "."
                 + joinPoint.getSignature().getName());
-        logger.info("参数 : " + Arrays.toString(joinPoint.getArgs()));
 //        loggger.info("参数 : " + joinPoint.getArgs());
 
     }
@@ -96,4 +95,7 @@ public class WebLogAspect {
         //System.out.println("1234:"+method.getAnnotation(Log.class).value());
         return null;
     }
+
+
+
 }
