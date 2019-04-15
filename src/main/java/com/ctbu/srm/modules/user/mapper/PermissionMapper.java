@@ -4,6 +4,9 @@ package com.ctbu.srm.modules.user.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ctbu.srm.entity.domain.Permission;
+import com.ctbu.srm.entity.dto.PermissionDto;
+
+import java.util.List;
 
 /**
  * <p>
@@ -15,4 +18,6 @@ import com.ctbu.srm.entity.domain.Permission;
  */
 public interface PermissionMapper extends BaseMapper<Permission> {
 
+
+    List<PermissionDto> findAll();
 }

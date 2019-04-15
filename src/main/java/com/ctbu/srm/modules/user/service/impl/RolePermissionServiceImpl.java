@@ -1,7 +1,7 @@
 package com.ctbu.srm.modules.user.service.impl;
 
 
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ctbu.srm.entity.domain.RolePermission;
 import com.ctbu.srm.modules.user.mapper.RolePermissionMapper;
 import com.ctbu.srm.modules.user.service.IRolePermissionService;
